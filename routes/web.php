@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Clients\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index', ['title' => 'Trang chu']);
-});
+Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/san-pham', function() {
     return view('clients.products', ['title' => 'San pham']);
@@ -43,11 +42,11 @@ Route::get('/dang-nhap', function() {
 
 Route::get('/lien-he', function() {
     return view('clients.contact', ['title' => 'Lien he']);
-});
+})->name('lien-he');
 
 Route::get('/gioi-thieu', function() {
     return view('clients.about', ['title' => 'Gioi thieu']);
-});
+})->name('gioi-thieu');
 
 Route::get('/lich-su-don-hang', function() {
     return view('clients.list-order', ['title' => 'Don hang']);
