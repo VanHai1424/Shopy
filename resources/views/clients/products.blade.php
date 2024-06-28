@@ -12,9 +12,9 @@
             <div class="col">
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="#!">Home</a></li>
-                  <li class="breadcrumb-item"><a href="#!">Women</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Dresses</li>
+                  <li class="breadcrumb-item"><a href="/">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{{$category->parent ? $category->parent->id : $category->id}}">{{$category->parent->name ?? $category->name}}</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">{{$category->parent ? $category->name : ""}}</li>
                 </ol>
               </nav>
             </div>
@@ -29,29 +29,7 @@
           <!-- sort -->
           <div class="row gutter-1 align-items-end">
             <div class="col-md-6">
-              <h1>Dresses</h1>
-            </div>
-            <div class="col-md-6 text-md-right">
-              <ul class="list list--horizontal list--separated text-muted fs-14">
-                <li>
-                  <span class="text-primary">15 from 90 items</span>
-                </li>
-                <li>
-                    <span>Sort by
-                    <span class="dropdown">
-                      <a class="dropdown-toggle underline" href="#!" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Most popular
-                      </a>
-  
-                      <span class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="#!">Action</a>
-                        <a class="dropdown-item" href="#!">Another action</a>
-                        <a class="dropdown-item" href="#!">Something else here</a>
-                      </span>
-                    </span>
-                  </span>
-                </li>
-              </ul>
+              <h1>{{$category->name}}</h1>
             </div>
           </div>
   
@@ -59,68 +37,17 @@
           <div class="row filter">
             <div class="col-md-6 col-lg">
               <div class="dropdown">
-                <button class="btn btn-filter btn-block dropdown-toggle" type="button" id="dropdown-filter-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Style
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdown-filter-1">
-                  <form>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck1">
-                        <label class="custom-control-label" for="customCheck1">Coats & Jackets</label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck2">
-                        <label class="custom-control-label" for="customCheck2">Dresses</label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck3">
-                        <label class="custom-control-label" for="customCheck3">Polo Shirts</label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck4">
-                        <label class="custom-control-label" for="customCheck4">Sweatshirts</label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck5">
-                        <label class="custom-control-label" for="customCheck5">T-Shirts & Tops</label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck6">
-                        <label class="custom-control-label" for="customCheck6">Knitwear</label>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg">
-              <div class="dropdown">
                 <button class="btn btn-filter btn-block dropdown-toggle" type="button" id="dropdown-filter-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Size
+                  Kích Cỡ
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdown-filter-2">
-                  <form>
+                  <form action="" id="sizeform" method="post">
                     <div class="btn-group-toggle btn-group-square" data-toggle="buttons">
+                      @foreach ($sizes as $item)
                       <label class="btn active">
-                        <input type="checkbox" name="options" id="option-1" checked> 35
+                        <input type="checkbox" name="size" value="{{$item->id}}" id="option-{{$item->id}}"> {{$item->name}}
                       </label>
-                      <label class="btn">
-                        <input type="checkbox" name="options" id="option-2"> 35.5
-                      </label>
-                      <label class="btn">
-                        <input type="checkbox" name="options" id="option-3"> 36
-                      </label>
-                      <label class="btn">
-                        <input type="checkbox" name="options" id="option-4"> 36.5
-                      </label>
-                      <label class="btn">
-                        <input type="checkbox" name="options" id="option-5"> 37
-                      </label>
-                      <label class="btn">
-                        <input type="checkbox" name="options" id="option-6"> 38
-                      </label>
-                      <label class="btn">
-                        <input type="checkbox" name="options" id="option-7"> 38.5
-                      </label>
+                      @endforeach
                     </div>
                   </form>
                 </div>
@@ -129,171 +56,102 @@
             <div class="col-md-6 col-lg">
               <div class="dropdown">
                 <button class="btn btn-filter btn-block dropdown-toggle" type="button" id="dropdown-filter-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Color
+                  Màu Sắc
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdown-filter-3">
-                  <form>
+                  <form method="post" id="colorform" action="">
                     <div class="btn-group-toggle btn-group-square btn-group-colors" data-toggle="buttons">
-                      <label class="btn active text-red">
-                        <input type="checkbox" name="color-select" id="option-2-1" checked>
+                      @foreach ($colors as $item)
+                      <label class="btn text-{{$item->name}}">
+                        <input type="checkbox" name="color" value="{{$item->id}}" id="option-2-{{$item->id}}">
                       </label>
-                      <label class="btn text-blue">
-                        <input type="checkbox" name="color-select" id="option-2-2">
-                      </label>
-                      <label class="btn text-yellow">
-                        <input type="checkbox" name="color-select" id="option-2-3">
-                      </label>
-                      <label class="btn text-green">
-                        <input type="checkbox" name="color-select" id="option-2-4">
-                      </label>
-                      <label class="btn text-white">
-                        <input type="checkbox" name="color-select" id="option-2-5">
-                      </label>
-                      <label class="btn text-dark">
-                        <input type="checkbox" name="color-select" id="option-2-6">
-                      </label>
+                      @endforeach
                     </div>
                   </form>
                 </div>
               </div>
             </div>
-            <div class="col-md-6 col-lg">
-              <div class="dropdown">
-                <button class="btn btn-filter btn-block dropdown-toggle" type="button" id="dropdown-filter-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Price Range
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdown-filter-4">
-                  <form>
-                    <input type="text" class="rangeslider" name="Range Slider" value="" />
-                  </form>
-                </div>
-              </div>
-            </div>
+            <button id="submit-form" class="btn btn-primary px-3">Lọc</button>
           </div>
   
-  
-          <!-- products -->
-          <div class="row gutter-1">
-  
-            <div class="col-6 col-md-4">
-              <div class="card card-product">
-                <figure class="card-image">
-                  <a href="#!" class="action"><i class="icon-heart"></i></a>
-                  <a href="#!">
-                    <img src="assets/images/demo/product-listing-1.jpg" alt="Image">
-                    <img src="assets/images/demo/product-listing-1-1.jpg" alt="Image">
-                  </a>
-                  <span class="badge badge-success">New</span>
-                </figure>
-                <div class="card-footer">
-                  <h3 class="card-title"><a href="#">Highwaist Jeans</a></h3>
-                  <span class="brand">Armani</span>
-                  <span class="price">$410</span>
+          <div id="product-container">
+            <!-- products -->
+            <div class="row gutter-1">
+              @foreach ($products as $item)
+              <div class="col-6 col-md-4">
+                <div class="card card-product">
+                  <figure class="card-image">
+                    <a href="#!">
+                      <img src="{{asset('storage/upload/'.$item->thumbnail)}}" alt="Image">
+                    </a>
+                  </figure>
+                  <div class="card-footer">
+                    <h3 class="card-title mb-1"><a href="#">{{$item->name}}</a></h3>
+                    <span class="price">{{number_format($item->price)}} VND</span>
+                  </div>
                 </div>
               </div>
+              @endforeach
             </div>
-            <div class="col-6 col-md-4">
-              <div class="card card-product">
-                <figure class="card-image">
-                  <a href="#!" class="action"><i class="icon-heart"></i></a>
-                  <a href="#!">
-                    <img src="assets/images/demo/product-listing-2.jpg" alt="Image">
-                    <img src="assets/images/demo/product-listing-2-1.jpg" alt="Image">
-                  </a>
-                  <span class="badge badge-success">New</span>
-                </figure>
-                <div class="card-footer">
-                  <h3 class="card-title"><a href="#">Highwaist Jeans</a></h3>
-                  <span class="price">$410</span>
-                </div>
+    
+            <div class="row">
+              <div class="col">
+                <nav aria-label="Page navigation">
+                  <ul class="pagination">
+                    @if ($products->onFirstPage())
+                    <li class="page-item disabled"><a class="page-link" href="#!">Previous</a></li>
+                    @else
+                    <li class="page-item"><a class="page-link" href="{{$products->previousPageUrl()}}">Previous</a></li>
+                    @endif
+                    @for ($i = 1; $i <= $products->lastPage(); $i++)
+                      <li class="page-item {{$products->currentPage() == $i ? 'active' : ""}}"><a class="page-link mx-1" href="{{$products->url($i)}}">{{$i}}</a></li>
+                    @endfor
+                    @if ($products->hasMorePages())
+                    <li class="page-item"><a class="page-link" href="{{$products->nextPageUrl()}}">Next</a></li>
+                    @else
+                    <li class="page-item disabled"><a class="page-link" href="#!">Next</a></li>
+                    @endif
+                  </ul>
+                </nav>
               </div>
-            </div>
-            <div class="col-6 col-md-4">
-              <div class="card card-product">
-                <figure class="card-image">
-                  <a href="#!" class="action"><i class="icon-heart"></i></a>
-                  <a href="#!">
-                    <img src="assets/images/demo/product-listing-3.jpg" alt="Image">
-                    <img src="assets/images/demo/product-listing-3-1.jpg" alt="Image">
-                  </a>
-                  <span class="badge badge-success">New</span>
-                </figure>
-                <div class="card-footer">
-                  <h3 class="card-title"><a href="#">Highwaist Jeans</a></h3>
-                  <span class="price text-red"><s>$500</s> $410</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-6 col-md-4">
-              <div class="card card-product">
-                <figure class="card-image">
-                  <a href="#!" class="action"><i class="icon-heart"></i></a>
-                  <a href="#!">
-                    <img src="assets/images/demo/product-listing-4.jpg" alt="Image">
-                    <img src="assets/images/demo/product-listing-4-1.jpg" alt="Image">
-                  </a>
-                  <span class="badge badge-success">New</span>
-                </figure>
-                <div class="card-footer">
-                  <h3 class="card-title"><a href="#">Highwaist Jeans</a></h3>
-                  <span class="brand">Armani</span>
-                  <span class="price">$410</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-6 col-md-4">
-              <div class="card card-product">
-                <figure class="card-image">
-                  <a href="#!" class="action"><i class="icon-heart"></i></a>
-                  <a href="#!">
-                    <img src="assets/images/demo/product-listing-5.jpg" alt="Image">
-                    <img src="assets/images/demo/product-listing-5-1.jpg" alt="Image">
-                  </a>
-                  <span class="badge badge-success">New</span>
-                </figure>
-                <div class="card-footer">
-                  <h3 class="card-title"><a href="#">Highwaist Jeans</a></h3>
-                  <span class="brand">Armani</span>
-                  <span class="price">$410</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-6 col-md-4">
-              <div class="card card-product">
-                <figure class="card-image">
-                  <a href="#!" class="action"><i class="icon-heart"></i></a>
-                  <a href="#!">
-                    <img src="assets/images/demo/product-listing-6.jpg" alt="Image">
-                    <img src="assets/images/demo/product-listing-6-1.jpg" alt="Image">
-                  </a>
-                  <span class="badge badge-success">New</span>
-                </figure>
-                <div class="card-footer">
-                  <h3 class="card-title"><a href="#">Highwaist Jeans</a></h3>
-                  <span class="brand">Armani</span>
-                  <span class="price">$410</span>
-                </div>
-              </div>
-            </div>
-  
-          </div>
-  
-          <div class="row">
-            <div class="col">
-              <nav aria-label="Page navigation">
-                <ul class="pagination">
-                  <li class="page-item"><a class="page-link" href="#!">Previous</a></li>
-                  <li class="page-item"><a class="page-link" href="#!">1</a></li>
-                  <li class="page-item active"><a class="page-link" href="#!">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#!">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#!">4</a></li>
-                  <li class="page-item"><a class="page-link" href="#!">5</a></li>
-                  <li class="page-item"><a class="page-link" href="#!">Next</a></li>
-                </ul>
-              </nav>
             </div>
           </div>
         </div>
       </section>
 @endsection
 
+@section('script')
+    <script>
+      $(document).ready(function() {
+        $('#submit-form').click(function() {
+          var sizeData = $('#sizeform').serializeArray();
+          var colorData = $('#colorform').serializeArray();
+          var formData = sizeData.concat(colorData);
+          var data = {};
+          formData.forEach(function(element) {
+              if (!data[element.name]) {
+                  data[element.name] = [];
+              }
+              data[element.name].push(element.value);
+          });
+          var categoryId = "{{$category->id}}";
+          
+          $.ajax({
+            url: '/danh-muc/' + categoryId,
+            method: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                data: data
+            },
+            success: function(response) {
+                console.log(response);
+                $('#product-container').html(response.html);
+            },
+            error: function(xhr, status, error) {
+                console.error(error); 
+            }
+        });
+        })
+      })
+    </script>
+@endsection

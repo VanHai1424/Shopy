@@ -40,7 +40,7 @@
                                 <div class="row gutter-1">
                                     @foreach ($categories as $item)
                                     <div class="col-6 col-md-4 col-lg-2">
-                                        <a href="">
+                                        <a href="{{route('danh-muc', $item->id)}}">
                                             <figure class="category">
                                                 <img src="{{asset('storage/upload/'. $item->img)}}" alt="Image">
                                                 <figcaption>{{$item->name}}</figcaption>
@@ -98,11 +98,11 @@
                     <div class="card card-product">
                         <figure class="card-image">
                             <a href="#!">
-                                <img src="assets/images/demo/product-1.jpg" alt="Image">
+                                <img src="{{asset('storage/upload/'. $item->thumbnail)}}" alt="Image">
                             </a>
                         </figure>
                         <div class="card-footer">
-                            <h3 class="card-title"><a href="#">{{$item->name}}</a></h3>
+                            <h3 class="card-title mb-1"><a href="#">{{$item->name}}</a></h3>
                             <span class="price">{{number_format($item->price)}} VND</span>
                         </div>
                     </div>

@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <nav class="navbar navbar-expand-lg navbar-light">
-          <a href="/" class="navbar-brand order-1 order-lg-2"><img src="assets/images/logo.svg" alt="Logo"></a>
+          <a href="/" class="navbar-brand order-1 order-lg-2"><img src="{{asset('assets/images/logo.svg')}}" alt="Logo"></a>
 
           <div class="collapse navbar-collapse order-4 order-lg-1" id="navbarMenu">
             <ul class="navbar-nav mr-auto">
@@ -18,8 +18,9 @@
                 </a>
                 <div class="dropdown-menu p-2" aria-labelledby="navbarDropdown-1">
                   <ul class="menu-list">
-                    <li class="menu-list-item"><a href="#" class="menu-list-link">Thời trang nam</a></li>
-                    <li class="menu-list-item"><a href="#" class="menu-list-link">Thời trang nữ</a></li>
+                    @foreach ($categories as $item)
+                    <li class="menu-list-item"><a href="{{route('danh-muc', $item->id)}}">{{$item->name}}</a></li>
+                    @endforeach
                   </ul>
                 </div>
               </li>
@@ -104,7 +105,7 @@
                     </div>
                     <div class="col-12">
                       <div class="cart-item">
-                        <a href="#!" class="cart-item-image"><img src="assets/images/demo/product-1.jpg" alt="Image"></a>
+                        <a href="#!" class="cart-item-image"><img src="{{asset('assets/images/demo/product-1.jpg')}}" alt="Image"></a>
                         <div class="cart-item-body">
                           <div class="row">
                             <div class="col-9">

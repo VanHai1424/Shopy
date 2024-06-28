@@ -30,8 +30,10 @@
     @yield('content')
     @include('blocks.clients.footer')
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{{asset('assets/js/vendor.min.js')}}"></script>
     <script src="{{asset('assets/js/app.js')}}"></script>
+    @yield('script')
 </body>
 
 <!-- Mirrored from demo.htmlhunters.com/shopy/index-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 26 Jun 2024 05:15:09 GMT -->

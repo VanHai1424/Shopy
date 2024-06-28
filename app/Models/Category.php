@@ -14,4 +14,16 @@ class Category extends Model
         'img',
         'parent_id',
     ];
+
+    public function products() {
+        return $this->hasMany(Product::class);
+    }
+
+    public function childrens() {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
+
+    public function parent() {
+        return $this->belongsTo(Category::class, 'parent_id');
+    }
 }

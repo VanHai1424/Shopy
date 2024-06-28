@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Clients\HomeController;
+use App\Http\Controllers\Clients\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,13 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/san-pham', function() {
-    return view('clients.products', ['title' => 'San pham']);
-});
+Route::get('/danh-muc/{id}', [OrderController::class, 'getProducts'])->name('danh-muc');
+Route::post('/danh-muc/{id}', [OrderController::class, 'filterProducts']);
 
-Route::get('/chi-tiet-san-pham', function() {
+Route::get('/san-pham/{id}', function() {
     return view('clients.product-detail', ['title' => 'Chi tiet san pham']);
 });
 

@@ -66,9 +66,9 @@
                     </select>
                 </div>
                 <ul class="list list--horizontal mt-2">
-                    <li><img src="assets/images/demo/visa-1.svg" class="payment" alt="Image"></li>
-                    <li><img src="assets/images/demo/master-card-1.svg" class="payment" alt="Image"></li>
-                    <li><img src="assets/images/demo/amex-1.svg" class="payment" alt="Image"></li>
+                    <li><img src="{{asset('assets/images/demo/visa-1.svg')}}" class="payment" alt="Image"></li>
+                    <li><img src="{{asset('assets/images/demo/master-card-1.svg')}}" class="payment" alt="Image"></li>
+                    <li><img src="{{asset('assets/images/demo/amex-1.svg')}}" class="payment" alt="Image"></li>
                 </ul>
             </div>
         </div>

@@ -17,4 +17,8 @@ class Product extends Model
         'status',
         'category_id',
     ];
+
+    public function variants() {
+        return $this->hasMany(Variant::class);
+    }
 }
