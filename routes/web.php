@@ -18,11 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/danh-muc/{id}', [OrderController::class, 'getProducts'])->name('danh-muc');
-Route::post('/danh-muc/{id}', [OrderController::class, 'filterProducts']);
+Route::post('/danh-muc/{id}', [OrderController::class, 'filterProducts'])->name('filter-pro');
 
-Route::get('/san-pham/{id}', function() {
-    return view('clients.product-detail', ['title' => 'Chi tiet san pham']);
-});
+Route::get('/san-pham/{id}', [OrderController::class, 'productDetail'])->name('chi-tiet');
+Route::post('/san-pham/{id}', [OrderController::class, 'filterVariant'])->name('filter-var');
 
 Route::get('/gio-hang', function() {
     return view('clients.cart', ['title' => 'Gio hang']);

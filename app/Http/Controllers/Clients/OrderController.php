@@ -65,5 +65,29 @@ class OrderController extends Controller
             'html' => $html
         ]);
     }
+
+    public function productDetail(Request $req) {
+        $title = 'Chi tiết sản phẩm';
+        $product = Product::with('variants')->findOrFail($req->id);
+        $relatedProducts = Product::where('category_id', $product->category_id)->where('id', '<>', $product->id)->get();
+        $variants = $product->variants;
+        $sizes = $variants->pluck('size')->unique();
+        $colors = $variants->pluck('color')->unique();
+        $imgs = $variants->pluck('img')->take(4)->unique();
+        $imgs = $imgs->prepend($product->thumbnail);
+        return view('clients.product-detail', compact('title', 'product', 'imgs', 'colors', 'sizes', 'relatedProducts'));
+    }
     
+    public function filterVariant(Request $req) {
+        $products = Product::with(['variants' => function($query) use ($req) {
+            $query->where('size_id', $req->idSize);
+        }])->findOrFail($req->route()->id);
+        $colorIds = $products->variants->pluck('color_id');
+        $colors = Color::select('id', 'name')->whereIn('id', $colorIds)->get();
+
+        $html = view('clients.filtered-variants')->with(compact('colors'))->render();
+        return response()->json([
+            'data' => $html
+        ]);
+    }
 }

@@ -4,12 +4,12 @@
     <div class="col-6 col-md-4">
         <div class="card card-product">
             <figure class="card-image">
-                <a href="#!">
+                <a href="{{route('chi-tiet', $item->id)}}">
                     <img src="{{ asset('storage/upload/' . $item->thumbnail) }}" alt="Image">
                 </a>
             </figure>
             <div class="card-footer">
-                <h3 class="card-title mb-1"><a href="#">{{ $item->name }}</a></h3>
+                <h3 class="card-title mb-1"><a href="{{route('chi-tiet', $item->id)}}">{{ $item->name }}</a></h3>
                 <span class="price">{{ number_format($item->price) }} VND</span>
             </div>
         </div>
