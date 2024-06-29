@@ -59,37 +59,63 @@
                   <i class="icon-user d-none d-lg-inline-block"></i>
                   <span class="d-inline-block d-lg-none">Account</span>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown-6">
-                  <div class="row gutter-2">
-                    <div class="col-12">
-                      <fieldset>
-                        <div class="row">
-                          <div class="col-12">
-                            <div class="form-label-group">
-                              <input type="text" id="inputName" class="form-control form-control-lg" placeholder="Name" required="" value="Dumitru">
-                              <label for="inputName">First Name</label>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-12">
-                            <div class="form-label-group">
-                              <input type="text" id="inputSurname" class="form-control form-control-lg" placeholder="Surname" required="">
-                              <label for="inputSurname">Surname</label>
-                            </div>
-                          </div>
-                        </div>
-                      </fieldset>
-                    </div>
-                    <div class="col-12 text-center">
-                      <a href="#" class="underline fs-14">Forgot Password ?</a>
-                    </div>
-                    <div class="col-12">
-                      <a href="#" class="btn btn-primary btn-block">Sign In</a>
-                      <a href="#" class="btn btn-outline-secondary btn-block">Create Account</a>
-                    </div>
+                @if (Auth::check()) 
+                    <div class="dropdown-menu px-0 pt-2 pb-1" style="width: 250px" aria-labelledby="navbarDropdown-6">
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                          <h5>{{Auth::user()->name}}</h5>
+                          <p>{{Auth::user()->email}}</p>
+                        </li>
+                        <li class="list-group-item"><a href="{{route('thong-tin-nguoi-dung')}}">Thông tin cá nhân</a></li>
+                        <li class="list-group-item"><a href="{{route('lich-su-don-hang')}}">Lịch sử mua hàng</a></li>
+                        <li class="list-group-item"><a href="{{route('doi-mat-khau')}}">Thay đổi mật khẩu</a></li>
+                        <li class="list-group-item"><a href="{{route('dang-xuat')}}">Đăng xuất</a></li>
+                      </ul>
                   </div>
+                @else
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown-6">
+                  <form action="{{route('dang-nhap')}}" method="POST">
+                    @csrf
+                    <div class="row gutter-2">
+                      <div class="col-12">
+                        @if (session('msg'))
+                          <div class="alert alert-{{ session('alert-type') }} ">
+                            {{ session('msg') }}
+                          </div>
+                        @endif
+                        <fieldset>
+                          <div class="row">
+                            <div class="col-12">
+                              <div class="form-label-group">
+                                <input type="text" id="inputName" name="email" class="form-control form-control-lg" placeholder="Name" value="{{old('email')}}">
+                                <label for="inputName">Email</label>
+                                @error('email')
+                                <div class="text-danger" style="color: #DB3030; font-size: 12.25px; padding: 0 20px 10px; width: 100%;">{{$message}}</div>
+                                @enderror
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-12">
+                              <div class="form-label-group">
+                                <input type="password" id="inputSurname" name="pass" class="form-control form-control-lg" placeholder="">
+                                <label for="inputSurname">Password</label>
+                                @error('pass')
+                                <div class="text-danger" style="color: #DB3030; font-size: 12.25px; padding: 0 20px 10px; width: 100%;">{{$message}}</div>
+                                @enderror
+                              </div>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </div>
+                      <div class="col-12">
+                        <input type="submit" class="btn btn-primary btn-block" value="Đăng nhập"></input>
+                        <a href="{{route('dang-nhap')}}" class="btn btn-outline-secondary btn-block">Tạo tài khoản</a>
+                      </div>
+                    </div>
+                  </form>
                 </div>
+                @endif
               </li>
               
               <!-- cart -->

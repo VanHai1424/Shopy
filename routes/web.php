@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\clients\AuthController;
 use App\Http\Controllers\Clients\HomeController;
 use App\Http\Controllers\Clients\OrderController;
 use Illuminate\Support\Facades\Route;
@@ -49,9 +50,15 @@ Route::get('/gioi-thieu', function() {
     return view('clients.about', ['title' => 'Gioi thieu']);
 })->name('gioi-thieu');
 
+Route::get('dang-nhap', [AuthController::class, 'login'])->name('dang-nhap');
+Route::post('dang-nhap', [AuthController::class, 'handleLogin'])->name('xu-ly-dang-nhap');
+Route::post('dang-ky', [AuthController::class, 'handleSignUp'])->name('xu-ly-dang-ky');
+
+Route::get('dang-xuat', [AuthController::class, 'logout'])->name('dang-xuat');
+
 Route::get('/lich-su-don-hang', function() {
     return view('clients.list-order', ['title' => 'Don hang']);
-});
+})->name('lich-su-don-hang');
 
 Route::get('/chi-tiet-don-hang', function() {
     return view('clients.order-detail', ['title' => 'Chi tiet don hang']);
@@ -59,8 +66,8 @@ Route::get('/chi-tiet-don-hang', function() {
 
 Route::get('/doi-mat-khau', function() {
     return view('clients.password', ['title' => 'Doi mat khau']);
-});
+})->name('doi-mat-khau');
 
 Route::get('/thong-tin-nguoi-dung', function() {
     return view('clients.personal', ['title' => 'Thong tin nguoi dung']);
-});
+})->name('thong-tin-nguoi-dung');
