@@ -17,7 +17,7 @@
             </div>
             <div class="row justify-content-center vh-100">
                 <div class="col-md-4 align-self-center text-white text-center">
-                    <h1 class="text-uppercase fs-60">Our Story</h1>
+                    <h1 class="text-uppercase fs-60">Giới Thiệu</h1>
                 </div>
             </div>
         </div>
@@ -31,13 +31,10 @@
                 <!-- post -->
                 <div class="col-lg-8">
                     <div class="bg-white p-4">
-                        <h2 class="text-uppercase">The History</h2>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                            mollit anim id est laborum.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed eius doloremque, suscipit minus
-                            asperiores hic aut at odio unde nihil culpa recusandae labore, sint nulla vitae repellat quaerat
-                            quo architecto!</p>
+                        <h2 class="text-uppercase">Lịch Sử</h2>
+                        <p>
+                            Shopy, một thương hiệu nổi tiếng trong lĩnh vực thương mại điện tử, đã trải qua một hành trình phát triển đầy ấn tượng kể từ khi thành lập. Được ra mắt vào năm 2024, Shopy bắt đầu như một nền tảng nhỏ với mục tiêu kết nối người mua và người bán trực tuyến. Với sự cam kết cung cấp trải nghiệm mua sắm tốt nhất, Shopy nhanh chóng mở rộng và trở thành một trong những nền tảng thương mại điện tử hàng đầu trên thế giới.
+                        </p>
                     </div>
                 </div>
 
@@ -49,13 +46,8 @@
 
                 <div class="col-lg-8">
                     <div class="bg-white p-4">
-                        <h2 class="text-uppercase">The Design</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed eius doloremque, suscipit minus
-                            asperiores hic aut at odio unde nihil culpa recusandae labore, sint nulla vitae repellat quaerat
-                            quo architecto!</p>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                            mollit anim id est laborum.</p>
+                        <h2 class="text-uppercase">Thiết kế</h2>
+                        <p>Thiết kế website của Shopy đã đóng góp quan trọng vào sự thành công của thương hiệu, mang lại trải nghiệm người dùng tuyệt vời và thu hút hàng triệu người mua sắm trực tuyến. Dưới đây là những yếu tố nổi bật trong thiết kế website của Shopy</p>
                     </div>
                 </div>
 

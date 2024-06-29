@@ -78,7 +78,7 @@
         <div class="container">
             <div class="row align-items-center gutter-1">
                 <div class="col-md-8">
-                    <p class="small text-muted">&copy; 2020 SHOPY. Product images by <a
+                    <p class="small text-muted">&copy; 2024 SHOPY. Product images by <a
                             href="#!" class="underline">OAK + FORT</a>. Bootstrap template by
                         <a href="#!" class="underline">HTMLHUNTERS</a>.</p>
                 </div>
