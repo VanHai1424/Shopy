@@ -126,7 +126,7 @@
                                                 data-target="#collapse-1-3" aria-expanded="false"
                                                 aria-controls="collapse-1-3">
                                                 <span>
-                                                    đánh giá (3)
+                                                    đánh giá ({{$comments->count()}})
                                                 </span>
                                             </button>
                                         </h5>
@@ -134,41 +134,21 @@
                                     <div id="collapse-1-3" class="collapse" aria-labelledby="heading-1-3"
                                         data-parent="#accordion-1">
                                         <div class="card-body">
-                                            <p class="text-muted fs-14">Check Cotton Shirt is rated <b
-                                                    class="text-dark">4.6</b> out of 5 by 3.</p>
                                             <ul>
+                                                @foreach ($comments as $item)
                                                 <li class="review">
                                                     <div class="review_meta">
-                                                        <ul class="rating">
-                                                            <li><i class="icon-star"></i></li>
-                                                            <li><i class="icon-star"></i></li>
-                                                            <li><i class="icon-star"></i></li>
-                                                            <li><i class="icon-star"></i></li>
-                                                            <li><i class="icon-star-o"></i></li>
-                                                        </ul>
-                                                        <span class="fs-12 text-uppercase text-muted ml-1">Juliet A. on may
-                                                            31, 2018</span>
+                                                        <span class="fs-12 text-uppercase text-muted">{{$item->created_at->format('d/m/Y')}}</span>
                                                     </div>
-                                                    <h4 class="review_title">Love it.</h4>
-                                                    <p>Nice jacket! Fits great. Looks good. Would buy again.</p>
+                                                    <h4 class="review_title">{{$item->user->name}}</h4>
+                                                    <p>{{$item->content}}</p>
                                                 </li>
-                                                <li class="review">
-                                                    <div class="review_meta">
-                                                        <ul class="rating">
-                                                            <li><i class="icon-star"></i></li>
-                                                            <li><i class="icon-star"></i></li>
-                                                            <li><i class="icon-star"></i></li>
-                                                            <li><i class="icon-star"></i></li>
-                                                            <li><i class="icon-star-o"></i></li>
-                                                        </ul>
-                                                        <span class="fs-12 text-uppercase text-muted ml-1">Juliet A. on may
-                                                            31, 2018</span>
-                                                    </div>
-                                                    <h4 class="review_title">Amazing fit.</h4>
-                                                    <p>Nice jacket! Fits great. Looks good. Would buy again.</p>
-                                                </li>
+                                                @endforeach
                                             </ul>
-                                            <a href="#" class="underlined">Add a review</a>
+                                            <form action="">
+                                                <textarea name="" id="" cols="30" rows="8" class="form-control" placeholder="Viết nhận xét ..." style="resize: none;"></textarea>
+                                                <input type="submit" class="btn btn-primary mt-3" value="Đánh giá"></input>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

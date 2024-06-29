@@ -125,12 +125,12 @@
                 <div class="col">
                     <div class="partners">
                         <div class="owl-carousel visible" data-items="[6,4,4,2]" data-nav="true" data-margin="10">
-                            <a href="#"><img src="assets/images/demo/logo/logo-1.png" alt="Logo"></a>
-                            <a href="#"><img src="assets/images/demo/logo/logo-2.png" alt="Logo"></a>
-                            <a href="#"><img src="assets/images/demo/logo/logo-3.png" alt="Logo"></a>
-                            <a href="#"><img src="assets/images/demo/logo/logo-4.png" alt="Logo"></a>
-                            <a href="#"><img src="assets/images/demo/logo/logo-5.png" alt="Logo"></a>
-                            <a href="#"><img src="assets/images/demo/logo/logo-6.png" alt="Logo"></a>
+                            <a href="#!"><img src="assets/images/demo/logo/logo-1.png" alt="Logo"></a>
+                            <a href="#!"><img src="assets/images/demo/logo/logo-2.png" alt="Logo"></a>
+                            <a href="#!"><img src="assets/images/demo/logo/logo-3.png" alt="Logo"></a>
+                            <a href="#!"><img src="assets/images/demo/logo/logo-4.png" alt="Logo"></a>
+                            <a href="#!"><img src="assets/images/demo/logo/logo-5.png" alt="Logo"></a>
+                            <a href="#!"><img src="assets/images/demo/logo/logo-6.png" alt="Logo"></a>
                         </div>
                     </div>
                 </div>

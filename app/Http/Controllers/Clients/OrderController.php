@@ -20,7 +20,6 @@ class OrderController extends Controller
         $perPage = 6;
         $category = Category::with('childrens.products')->findOrFail($req->id);
         $products = collect();
-    
         if ($category->parent_id == 0) {
             foreach ($category->childrens as $childCategory) {
                 $products = $products->merge($childCategory->products);
@@ -37,6 +36,16 @@ class OrderController extends Controller
         $sizes = Size::get();
         $colors = Color::get();
 
+        return view('clients.products', compact('title', 'category', 'products', 'sizes', 'colors'));
+    }
+
+    public function searchProducts(Request $req) {
+        $title = 'Sản phẩm';
+        $perPage = 6;
+        $category = null;
+        $products = Product::where('name', 'like', '%'.$req->keyw.'%')->orderBy('created_at', 'desc')->paginate($perPage)->withQueryString();
+        $sizes = Size::get();
+        $colors = Color::get();
         return view('clients.products', compact('title', 'category', 'products', 'sizes', 'colors'));
     }
 
@@ -75,7 +84,8 @@ class OrderController extends Controller
         $colors = $variants->pluck('color')->unique();
         $imgs = $variants->pluck('img')->take(4)->unique();
         $imgs = $imgs->prepend($product->thumbnail);
-        return view('clients.product-detail', compact('title', 'product', 'imgs', 'colors', 'sizes', 'relatedProducts'));
+        $comments = $product->comments;
+        return view('clients.product-detail', compact('title', 'product', 'imgs', 'colors', 'sizes', 'relatedProducts', 'comments'));
     }
     
     public function filterVariant(Request $req) {

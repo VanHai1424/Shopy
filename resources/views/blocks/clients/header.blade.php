@@ -47,9 +47,9 @@
                   <span class="d-inline-block d-lg-none">Search</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown-4">
-                  <div class="form-group">
-                    <input type="text" class="form-control" id="searchForm" placeholder="Search for items and brands">
-                  </div>
+                  <form action="{{route('search-pro')}}" class="form-group">
+                    <input type="text" class="form-control" name="keyw" id="searchForm" placeholder="Tìm kiếm ...">
+                  </form>
                 </div>
               </li>
 

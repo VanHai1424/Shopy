@@ -23,6 +23,8 @@ Route::post('/danh-muc/{id}', [OrderController::class, 'filterProducts'])->name(
 Route::get('/san-pham/{id}', [OrderController::class, 'productDetail'])->name('chi-tiet');
 Route::post('/san-pham/{id}', [OrderController::class, 'filterVariant'])->name('filter-var');
 
+Route::get('tim-kiem', [OrderController::class, 'searchProducts'])->name('search-pro');
+
 Route::get('/gio-hang', function() {
     return view('clients.cart', ['title' => 'Gio hang']);
 });

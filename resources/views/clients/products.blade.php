@@ -13,8 +13,8 @@
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="/">Home</a></li>
-                  <li class="breadcrumb-item"><a href="{{$category->parent ? $category->parent->id : $category->id}}">{{$category->parent->name ?? $category->name}}</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">{{$category->parent ? $category->name : ""}}</li>
+                  <li class="breadcrumb-item"><a href="{{$category?->parent ? $category->parent->id : $category?->id}}">{{$category?->parent?->name ?? $category?->name}}</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">{{$category?->parent ? $category?->name : ""}}</li>
                 </ol>
               </nav>
             </div>
@@ -29,7 +29,7 @@
           <!-- sort -->
           <div class="row gutter-1 align-items-end">
             <div class="col-md-6">
-              <h1>{{$category->name}}</h1>
+              <h1>{{$category?->name}}</h1>
             </div>
           </div>
   
@@ -135,7 +135,7 @@
               data[element.name].push(element.value);
           });
           $.ajax({
-            url: '{{ route("filter-pro", $category->id) }}',
+            url: '{{ route("filter-pro", $category->id ?? 1) }}',
             method: 'POST',
             data: {
                 _token: '{{ csrf_token() }}',

@@ -9,19 +9,19 @@
                     <div class="col">
                         <h4 class="eyebrow mb-1">Company</h4>
                         <ul class="menu-list">
-                            <li class="menu-list-item"><a href="#" class="menu-list-link">Our story</a></li>
-                            <li class="menu-list-item"><a href="#" class="menu-list-link">Careers</a></li>
-                            <li class="menu-list-item"><a href="#" class="menu-list-link">Press</a></li>
-                            <li class="menu-list-item"><a href="#" class="menu-list-link">Contact</a></li>
+                            <li class="menu-list-item"><a href="#!" class="menu-list-link">Our story</a></li>
+                            <li class="menu-list-item"><a href="#!" class="menu-list-link">Careers</a></li>
+                            <li class="menu-list-item"><a href="#!" class="menu-list-link">Press</a></li>
+                            <li class="menu-list-item"><a href="#!" class="menu-list-link">Contact</a></li>
                         </ul>
                     </div>
                     <div class="col">
                         <h4 class="eyebrow mb-1">Help Center</h4>
                         <ul class="menu-list">
-                            <li class="menu-list-item"><a href="#" class="menu-list-link">Shipping</a></li>
-                            <li class="menu-list-item"><a href="#" class="menu-list-link">Returns</a></li>
-                            <li class="menu-list-item"><a href="#" class="menu-list-link">Payment</a></li>
-                            <li class="menu-list-item"><a href="#" class="menu-list-link">FAQ</a></li>
+                            <li class="menu-list-item"><a href="#!" class="menu-list-link">Shipping</a></li>
+                            <li class="menu-list-item"><a href="#!" class="menu-list-link">Returns</a></li>
+                            <li class="menu-list-item"><a href="#!" class="menu-list-link">Payment</a></li>
+                            <li class="menu-list-item"><a href="#!" class="menu-list-link">FAQ</a></li>
                         </ul>
                     </div>
                 </div>
@@ -79,8 +79,8 @@
             <div class="row align-items-center gutter-1">
                 <div class="col-md-8">
                     <p class="small text-muted">&copy; 2020 SHOPY. Product images by <a
-                            href="https://www.oakandfort.com/" class="underline">OAK + FORT</a>. Bootstrap template by
-                        <a href="https://htmlhunters.com/" class="underline">HTMLHUNTERS</a>.</p>
+                            href="#!" class="underline">OAK + FORT</a>. Bootstrap template by
+                        <a href="#!" class="underline">HTMLHUNTERS</a>.</p>
                 </div>
                 <div class="col-md-4 text-md-right text-muted">
                     <ul class="list list--horizontal list--separated">
