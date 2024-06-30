@@ -49,11 +49,12 @@ class AuthController extends Controller
     public function handleSignUp(Request $req) {
         $validator = Validator::make($req->all(), [
             'nameS' => 'required',
-            'emailS' => 'required|email',
+            'emailS' => 'required|email|unique:users,email',
             'passS' => 'required'
         ], [
             'nameS.required' => 'Name là bắt buộc',
             'emailS.required' => 'Email là bắt buộc',
+            'emailS.unique' => 'Email đã tồn tại',
             'emailS.email' => 'Email không đúng định dạng',
             'passS.required' => 'Password là bắt buộc'
         ]);

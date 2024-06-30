@@ -145,10 +145,12 @@
                                                 </li>
                                                 @endforeach
                                             </ul>
+                                            @if (Auth::check())
                                             <form id="form-danhGia">
                                                 <textarea name="content" id="input-comment" cols="30" rows="8" class="form-control" placeholder="Viết nhận xét ..." style="resize: none;" required></textarea>
                                                 <input type="submit" class="btn btn-primary mt-3" id="btn-danhGia" value="Đánh giá"></input>
                                             </form>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
