@@ -26,6 +26,8 @@ Route::post('/san-pham/{id}', [OrderController::class, 'filterVariant'])->name('
 
 Route::get('tim-kiem', [OrderController::class, 'searchProducts'])->name('search-pro');
 
+Route::post('binh-luan', [OrderController::class, 'comment'])->name('gui-binh-luan');
+
 Route::get('/gio-hang', function() {
     return view('clients.cart', ['title' => 'Gio hang']);
 });

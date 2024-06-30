@@ -134,7 +134,7 @@
                                     <div id="collapse-1-3" class="collapse" aria-labelledby="heading-1-3"
                                         data-parent="#accordion-1">
                                         <div class="card-body">
-                                            <ul>
+                                            <ul id="block-comment">
                                                 @foreach ($comments as $item)
                                                 <li class="review">
                                                     <div class="review_meta">
@@ -145,9 +145,9 @@
                                                 </li>
                                                 @endforeach
                                             </ul>
-                                            <form action="">
-                                                <textarea name="" id="" cols="30" rows="8" class="form-control" placeholder="Viết nhận xét ..." style="resize: none;"></textarea>
-                                                <input type="submit" class="btn btn-primary mt-3" value="Đánh giá"></input>
+                                            <form id="form-danhGia">
+                                                <textarea name="content" id="input-comment" cols="30" rows="8" class="form-control" placeholder="Viết nhận xét ..." style="resize: none;" required></textarea>
+                                                <input type="submit" class="btn btn-primary mt-3" id="btn-danhGia" value="Đánh giá"></input>
                                             </form>
                                         </div>
                                     </div>
@@ -222,7 +222,7 @@
                         idSize
                     },
                     success: function(response) {
-                        $('#block-color').html(response.data);
+                        $('#block-color').html(response.html);
                     },
                     error: function(error) {
                         console.log(error);
@@ -230,7 +230,25 @@
                 })
             });
 
-            
+            $('#form-danhGia').on('submit', function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: '{{route("gui-binh-luan")}}',
+                    method: "POST",
+                    data: {
+                        _token: '{{csrf_token()}}',
+                        productId: '{{$product->id}}',
+                        content: $('#input-comment').val()
+                    },
+                    success: function(response) {
+                        $('#block-comment').html(response.html)
+                        $('#input-comment').val('')
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                })
+            })
         });
     </script>
 @endsection

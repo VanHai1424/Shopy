@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Clients;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Color;
+use App\Models\Comment;
 use App\Models\Product;
 use App\Models\Size;
 use App\Models\Variant;
@@ -12,6 +13,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -68,7 +70,7 @@ class OrderController extends Controller
             }
         });
         $products = $query->orderBy('created_at', 'desc')->paginate(6);
-        $html = view('clients.filtered-products', compact('products'))->render();
+        $html = view('blocks.clients.filtered-products', compact('products'))->render();
     
         return response()->json([
             'html' => $html
@@ -84,7 +86,7 @@ class OrderController extends Controller
         $colors = $variants->pluck('color')->unique();
         $imgs = $variants->pluck('img')->take(4)->unique();
         $imgs = $imgs->prepend($product->thumbnail);
-        $comments = $product->comments;
+        $comments = $product->comments->sortByDesc('created_at');
         return view('clients.product-detail', compact('title', 'product', 'imgs', 'colors', 'sizes', 'relatedProducts', 'comments'));
     }
     
@@ -95,9 +97,22 @@ class OrderController extends Controller
         $colorIds = $products->variants->pluck('color_id');
         $colors = Color::select('id', 'name')->whereIn('id', $colorIds)->get();
 
-        $html = view('clients.filtered-variants')->with(compact('colors'))->render();
+        $html = view('blocks.clients.filtered-variants')->with(compact('colors'))->render();
         return response()->json([
-            'data' => $html
+            'html' => $html
+        ]);
+    }
+
+    public function comment(Request $req) {
+        $comment = Comment::create([
+            'content' => $req->content,
+            'user_id' => Auth::user()->id,
+            'product_id' => $req->productId,
+        ]);
+        $comments = Comment::where('product_id', $req->productId)->orderBy('created_at', 'desc')->get();
+        $html = view('blocks.clients.comment', compact('comments'))->render();
+        return response()->json([
+            'html' => $html
         ]);
     }
 }
