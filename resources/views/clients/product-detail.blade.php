@@ -23,7 +23,6 @@
         </div>
     </section>
 
-
     <!-- product -->
     <section class="hero">
         <div class="container">
@@ -93,7 +92,7 @@
                             <span class="price fs-24 text-red">{{number_format($product->price)}} VND</span>
                         </div>
                         <div class="col-12">
-                            <a href="#" class="btn btn-block btn-primary">Add to bag</a>
+                            <a id="add_to_cart" class="btn btn-block btn-primary">Thêm vào giỏ hàng</a>
                         </div>
                     </div>
 
@@ -248,6 +247,28 @@
                     },
                     error: function(error) {
                         console.log(error);
+                    }
+                })
+            })
+
+            const btnAddToCart = $('#add_to_cart');
+            btnAddToCart.on('click', function() {
+                $.ajax({
+                    url: '{{route("them-vao-gio-hang")}}',
+                    method: "POST",
+                    data: {
+                        _token: '{{csrf_token()}}',
+                        id: '{{$product->id}}',
+                        colorId: $('label.active input[name="color"]').val(),
+                        sizeId: $('label.active input[name="size"]').val()
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        alert('Đã thêm vào giỏ hàng');
+                    },
+                    error: function(error) {
+                        console.log(error);
+                        alert('Vui lòng chọn size và color');
                     }
                 })
             })

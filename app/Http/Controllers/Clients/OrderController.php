@@ -115,4 +115,49 @@ class OrderController extends Controller
             'html' => $html
         ]);
     }
+
+    public function cart() {
+        $title = 'Giỏ hàng';
+        $cart = session()->get('cart', []);
+        $totalPrice = 0;
+        foreach ($cart as $key => $value) {
+            $totalPrice += $value['product']['price'] * $value['quantityOrder'];
+        }
+        return view('clients.cart', compact('title', 'cart', 'totalPrice'));
+    }
+
+    public function addToCart(Request $req) {
+        try {
+            $colorId = $req->colorId;
+            $sizeId = $req->sizeId;
+            $variant = Variant::with(['product', 'color', 'size'])
+                            ->where('product_id', $req->id)
+                            ->where('color_id', $colorId)
+                            ->where('size_id', $sizeId)
+                            ->first();
+
+            if (!$variant) {
+                throw new Exception('Lỗi');
+            } else {
+                $cart = session()->get('cart', []);
+
+                if (isset($cart[$variant->id])) {
+                    $cart[$variant->id]['quantityOrder'] += 1;
+                } else {
+                    $variantArray = $variant->toArray();
+                    $variantArray['quantityOrder'] = 1;
+                    $cart[$variant->id] = $variantArray;
+                }
+
+                session()->put('cart', $cart);
+            }
+
+        } catch(Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Có lỗi xảy ra',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }

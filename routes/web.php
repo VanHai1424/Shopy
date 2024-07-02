@@ -18,20 +18,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
 Route::get('danh-muc/{id}', [OrderController::class, 'getProducts'])->name('danh-muc');
 Route::post('danh-muc/{id}', [OrderController::class, 'filterProducts'])->name('filter-pro');
-
 Route::get('san-pham/{id}', [OrderController::class, 'productDetail'])->name('chi-tiet');
 Route::post('san-pham/{id}', [OrderController::class, 'filterVariant'])->name('filter-var');
-
 Route::get('tim-kiem', [OrderController::class, 'searchProducts'])->name('search-pro');
-
 Route::post('binh-luan', [OrderController::class, 'comment'])->name('gui-binh-luan');
-
-Route::get('gio-hang', function() {
-    return view('clients.cart', ['title' => 'Gio hang']);
-});
+Route::get('gio-hang', [OrderController::class, 'cart'])->name('gio-hang');
+Route::post('them-vao-gio-hang', [OrderController::class, 'addToCart'])->name('them-vao-gio-hang');
 
 Route::get('thanh-toan', function() {
     return view('clients.checkout', ['title' => 'Thanh toan']);

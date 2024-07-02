@@ -119,52 +119,11 @@
               </li>
               
               <!-- cart -->
-              <li class="nav-item dropdown dropdown-md dropdown-hover">
-                <a class="nav-icon dropdown-toggle" id="navbarDropdown-8" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <li class="nav-item">
+                <a href="{{route('gio-hang')}}" class="nav-icon">
                   <i class="icon-shopping-bag d-none d-lg-inline-block"></i>
                   <span class="d-inline-block d-lg-none">Bag</span>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown-8">
-                  <div class="row gutter-3">
-                    <div class="col-12">
-                      <h3 class="eyebrow text-dark fs-16 mb-0">My Bag</h3>
-                    </div>
-                    <div class="col-12">
-                      <div class="cart-item">
-                        <a href="#!" class="cart-item-image"><img src="{{asset('assets/images/demo/product-1.jpg')}}" alt="Image"></a>
-                        <div class="cart-item-body">
-                          <div class="row">
-                            <div class="col-9">
-                              <h5 class="cart-item-title">Bold Cuff Insert Polo Shirt</h5>
-                              <small>Fred Perry</small>
-                              <ul class="list list--horizontal fs-14">
-                                <li><s>$85.00</s></li>
-                                <li class="text-red">$42.00</li>
-                              </ul>
-                            </div>
-                            <div class="col-3 text-right">
-                              <ul class="cart-item-options">
-                                <li><a href="#" class="icon-x"></a></li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-12">
-                      <ul class="list-group list-group-minimal">
-                        <li class="list-group-item d-flex justify-content-between align-items-center text-uppercase font-weight-bold">
-                          Subtotal
-                          <span>$78.00</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="col-12">
-                      <a href="#" class="btn btn-primary btn-block">Add all to cart</a>
-                      <a href="#" class="btn btn-outline-secondary btn-block">View favorites</a>
-                    </div>
-                  </div>
-                </div>
               </li>
             </ul>
           </div>

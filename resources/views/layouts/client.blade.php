@@ -23,6 +23,7 @@
         gtag('config', 'UA-176058743-2');
     </script>
     <title>@yield('title')</title>
+    @yield('style')
 </head>
 
 <body>
