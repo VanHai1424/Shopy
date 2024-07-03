@@ -26,10 +26,9 @@ Route::get('tim-kiem', [OrderController::class, 'searchProducts'])->name('search
 Route::post('binh-luan', [OrderController::class, 'comment'])->name('gui-binh-luan');
 Route::get('gio-hang', [OrderController::class, 'cart'])->name('gio-hang');
 Route::post('them-vao-gio-hang', [OrderController::class, 'addToCart'])->name('them-vao-gio-hang');
-
-Route::get('thanh-toan', function() {
-    return view('clients.checkout', ['title' => 'Thanh toan']);
-});
+Route::get('thanh-toan', [OrderController::class, 'checkout'])->name('thanh-toan');
+Route::post('thay-doi-so-luong', [OrderController::class, 'updateQuantity'])->name('thay-doi-so-luong');
+Route::post('remove-to-cart', [OrderController::class, 'removeToCart'])->name('remove-to-cart');
 
 Route::get('don-hang', function() {
     return view('clients.order', ['title' => 'Don hang']);
@@ -64,4 +63,5 @@ Route::middleware(['isLogin'])->group(function () {
     
     Route::get('doi-mat-khau', [AccountController::class, 'changePass'])->name('doi-mat-khau');
     Route::post('cap-nhat-mat-khau', [AccountController::class, 'handleChangePass'])->name('cap-nhat-mat-khau');
+
 });

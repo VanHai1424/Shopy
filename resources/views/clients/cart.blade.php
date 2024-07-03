@@ -85,8 +85,7 @@
                 </div>
             </div>
 
-            <div class="row gutter-3 gutter-lg-1">
-
+            <div class="row gutter-3 gutter-lg-1" id="cart">
                 <!-- content -->
                 <div class="col">
                     <div class="bg-white cart-item-list p-2 p-lg-3 mb-1">
@@ -121,10 +120,10 @@
                                                     </li>
                                                     <li>
                                                         <div class="qty d-flex align-items-center mt-1">
-                                                            <span class="minus bg-primary">-</span>
+                                                            <span class="minus bg-primary" data-id="{{$item['id']}}">-</span>
                                                             <input type="number" class="count text-primary" name="qty"
-                                                                value="{{$item['quantityOrder']}}" max="{{$item['quantity']}}">
-                                                            <span class="plus bg-primary">+</span>
+                                                                value="{{$item['quantityOrder']}}" max="{{$item['quantity']}}" disabled>
+                                                            <span class="plus bg-primary" data-id="{{$item['id']}}">+</span>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -133,7 +132,7 @@
                                     </div>
                                     <div class="col-2 text-right">
                                         <ul class="cart-item-options">
-                                            <li><a href="#" class="icon-x"></a></li>
+                                            <li><a data-id="{{$item['id']}}" id="remove-cart" class="icon-x"></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -141,7 +140,9 @@
                         </div>
                         @endforeach
                     </div>
-
+                    @if (!$cart)
+                    <p class="text-red">Không có sản phẩm nào trong giỏ hàng</p>
+                    @endif
                     <a href="{{ route('home') }}" class="underlined">Tiếp tục mua hàng</a>
                 </div>
 
@@ -174,34 +175,82 @@
                                 <span class="text-red">{{number_format($totalPrice)}} VND</span>
                             </li>
                         </ul>
-                        <a href="#" class="btn btn-primary btn-block">Thanh toán</a>
+                        <a href="{{route('thanh-toan')}}" class="btn btn-primary btn-block">Thanh toán</a>
                     </div>
                 </aside>
             </div>
         </div>
     </section>
+    
 @endsection
 
 @section('script')
     <script>
+        @if (session('alert'))
+            alert('{{ session('alert') }}');
+        @endif
+        
         $(document).ready(function() {
-            $('.count').prop('disabled', true);
-
             $(document).on('click', '.plus', function() {
-                var input = $(this).siblings('.count');
-                input.val(parseInt(input.val()) + 1);
-                if (input.val() > parseInt(input.prop('max'))) {
-                    input.val(parseInt(input.prop('max')));
-                }
+                $.ajax({
+                    url: '{{route("thay-doi-so-luong")}}',
+                    method: "POST",
+                    data: {
+                        _token: "{{csrf_token()}}",
+                        data: {
+                            id: $(this).data('id'),
+                            value: 'plus'
+                        }
+                    },
+                    success: function(response) {
+                        $('#cart').html(response.html);
+                        console.log(response);
+                    },
+                    erorr: function(error) {
+                        console.log(error);
+                    }
+                })
             });
 
             $(document).on('click', '.minus', function() {
-                var input = $(this).siblings('.count');
-                input.val(parseInt(input.val()) - 1);
-                if (input.val() == 0) {
-                    input.val(1);
-                }
+                $.ajax({
+                    url: '{{route("thay-doi-so-luong")}}',
+                    method: "POST",
+                    data: {
+                        _token: "{{csrf_token()}}",
+                        data: {
+                            id: $(this).data('id'),
+                            value: 'minus'
+                        }
+                    },
+                    success: function(response) {
+                        $('#cart').html(response.html);
+                        console.log(response);
+                    },
+                    erorr: function(error) {
+                        console.log(error);
+                    }
+                })
             });
+
+            $(document).on('click', '#remove-cart', function() {
+                $.ajax({
+                    url: "{{route('remove-to-cart')}}",
+                    method: "POST",
+                    data: {
+                        _token: "{{csrf_token()}}",
+                        id: $(this).data('id')
+                    },
+                    success: function(response) {
+                        $('#cart').html(response.html);
+                        console.log(response);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                })
+            })
+
         });
     </script>
 @endsection

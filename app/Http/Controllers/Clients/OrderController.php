@@ -160,4 +160,52 @@ class OrderController extends Controller
             ], 500);
         }
     }
+
+    public function updateQuantity(Request $req) {
+        $cart = session()->get('cart', []);
+        if($req->data['value'] == 'plus') {
+            $cart[$req->data['id']]['quantityOrder'] += 1;
+            if($cart[$req->data['id']]['quantityOrder'] > $cart[$req->data['id']]['quantity']) {
+                $cart[$req->data['id']]['quantityOrder'] = $cart[$req->data['id']]['quantityOrder'] = $cart[$req->data['id']]['quantity']; 
+            }
+        } else {
+            $cart[$req->data['id']]['quantityOrder'] -= 1;
+            if($cart[$req->data['id']]['quantityOrder'] <= 0) {
+                $cart[$req->data['id']]['quantityOrder'] = 1; 
+            }
+        }
+        session()->put('cart', $cart);
+        $totalPrice = 0;
+        foreach ($cart as $key => $value) {
+            $totalPrice += $value['product']['price'] * $value['quantityOrder'];
+        }
+        $html = view('blocks.clients.cart-table', compact('cart', 'totalPrice'))->render();
+        return response()->json(['html' => $html]);
+    }   
+
+    public function removeToCart(Request $req) {
+        $cart = session()->get('cart', []);
+        // return response()->json([
+        //     'data' => $cart,
+        //     'id' => $req->id
+        // ]);
+        unset($cart[$req->id]);
+
+        session()->put('cart', $cart);
+        $totalPrice = 0;
+        foreach ($cart as $key => $value) {
+            $totalPrice += $value['product']['price'] * $value['quantityOrder'];
+        }
+        $html = view('blocks.clients.cart-table', compact('cart', 'totalPrice'))->render();
+        return response()->json(['html' => $html]);
+    }
+
+    public function checkout() {
+        if(session()->get('cart', [])) {
+            $title = 'Thanh toán';
+            return view('clients.checkout', compact('title'));
+        } else {
+            return redirect()->back()->with('alert', 'Bạn chưa chọn sản phẩm nào');
+        }
+    }
 }

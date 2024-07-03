@@ -19,7 +19,7 @@ class CheckLogin
         if(Auth::check()) {
             return $next($request);
         } else {
-            return abort(404);
+            return redirect()->route('dang-nhap');
         }
     }
 }
