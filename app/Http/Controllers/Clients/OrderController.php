@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Color;
 use App\Models\Comment;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\Size;
 use App\Models\Variant;
@@ -14,6 +16,8 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
@@ -185,10 +189,6 @@ class OrderController extends Controller
 
     public function removeToCart(Request $req) {
         $cart = session()->get('cart', []);
-        // return response()->json([
-        //     'data' => $cart,
-        //     'id' => $req->id
-        // ]);
         unset($cart[$req->id]);
 
         session()->put('cart', $cart);
@@ -203,9 +203,80 @@ class OrderController extends Controller
     public function checkout() {
         if(session()->get('cart', [])) {
             $title = 'Thanh toán';
-            return view('clients.checkout', compact('title'));
+            $cart = session()->get('cart', []);
+            $totalPrice = 0;
+            foreach ($cart as $key => $value) {
+                $totalPrice += $value['product']['price'] * $value['quantityOrder'];
+            }
+            return view('clients.checkout', compact('title', 'cart', 'totalPrice'));
         } else {
             return redirect()->back()->with('alert', 'Bạn chưa chọn sản phẩm nào');
         }
+    }
+
+    public function placeOrder(Request $req) {
+        $validator = Validator::make($req->all(), [
+            'address' => 'required',
+            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+        ], [
+            'address.required' => 'Address là bắt buộc',
+            'phone.required' => 'Phone là bắt buộc',
+            'phone.regex' => 'Phone sai định dạng',
+            'phone.min' => 'Phone phải có tối thiểu :min số',
+        ]);
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        }
+
+        $cart = session()->get('cart', []);
+        $totalPrice = 0;
+        foreach ($cart as $key => $value) {
+            $totalPrice += $value['product']['price'] * $value['quantityOrder'];
+        }
+
+        try {
+            DB::beginTransaction();
+            $order = Order::create([
+                'name' => $req->name,
+                'email' => $req->email,
+                'address' => $req->address,
+                'phone' => $req->phone,
+                'total' => $totalPrice,
+                'status' => 1,
+                'user_id' => Auth::user()->id
+            ]);
+            foreach ($cart as $key => $value) {
+                OrderDetail::create([
+                    'order_id' => $order->id,
+                    'variant_id' => $key,
+                    'quantity' => $value['quantityOrder'],
+                    'price' => $value['product']['price'],
+                ]);
+            }
+            DB::commit();
+
+            session()->put('orderSuccess', [
+                'orderId' => $order->id,
+                'totalPrice' => $totalPrice,
+                'images' => array_column($cart, 'img')
+            ]);
+
+            session()->forget('cart');
+
+            return redirect()->route('thanh-cong');
+        } catch (Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with([
+                'msg' => 'Có lỗi xảy ra',
+                'alert-type' => 'danger'
+            ])->withInput();
+        }
+    }       
+
+    public function orderSuccess() {
+        $title = 'Đặt hàng thành công';
+        $orderSuccess = session()->get('orderSuccess', []);
+
+        return view('clients.order', compact('title', 'orderSuccess'));
     }
 }
