@@ -15,4 +15,8 @@ class OrderDetail extends Model
         'quantity',
         'price',
     ];
+
+    public function variant() {
+        return $this->belongsTo(Variant::class);
+    }
 }

@@ -32,11 +32,11 @@ Route::post('dat-hang', [OrderController::class, 'placeOrder'])->name('dat-hang'
 Route::get('dat-hang-thanh-cong', [OrderController::class, 'orderSuccess'])->name('thanh-cong');
 
 Route::get('lien-he', function() {
-    return view('clients.contact', ['title' => 'Lien he']);
+    return view('clients.contact', ['title' => 'Liên hệ']);
 })->name('lien-he');
 
 Route::get('gioi-thieu', function() {
-    return view('clients.about', ['title' => 'Gioi thieu']);
+    return view('clients.about', ['title' => 'Giới thiệu']);
 })->name('gioi-thieu');
 
 // Auth
@@ -49,17 +49,8 @@ Route::get('dang-xuat', [AuthController::class, 'logout'])->name('dang-xuat');
 Route::middleware(['isLogin'])->group(function () {
     Route::get('thong-tin-nguoi-dung', [AccountController::class, 'info'])->name('thong-tin-nguoi-dung');    
     Route::post('cap-nhat-nguoi-dung', [AccountController::class, 'updateInfo'])->name('cap-nhat-nguoi-dung');    
-
-    Route::get('lich-su-don-hang', function() {
-        return view('clients.list-order', ['title' => 'Don hang']);
-    })->name('lich-su-don-hang');
-    
-    Route::get('chi-tiet-don-hang', function() {
-        return view('clients.order-detail', ['title' => 'Chi tiet don hang']);
-    });
-    
+    Route::get('lich-su-don-hang', [AccountController::class, 'historyOrder'])->name('lich-su-don-hang');
     Route::get('doi-mat-khau', [AccountController::class, 'changePass'])->name('doi-mat-khau');
     Route::post('cap-nhat-mat-khau', [AccountController::class, 'handleChangePass'])->name('cap-nhat-mat-khau');
-
     Route::get('thanh-toan', [OrderController::class, 'checkout'])->name('thanh-toan');
 });

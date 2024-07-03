@@ -18,4 +18,8 @@ class Order extends Model
         'status',
         'user_id',
     ];
+
+    public function orderDetail() {
+        return $this->hasMany(OrderDetail::class);
+    }
 }

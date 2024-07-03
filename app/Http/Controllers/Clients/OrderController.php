@@ -275,7 +275,11 @@ class OrderController extends Controller
 
     public function orderSuccess() {
         $title = 'Đặt hàng thành công';
-        $orderSuccess = session()->get('orderSuccess', []);
+        $orderSuccess = session()->get('orderSuccess', null);
+
+        if (!$orderSuccess) {
+            abort(404); 
+        }
 
         return view('clients.order', compact('title', 'orderSuccess'));
     }

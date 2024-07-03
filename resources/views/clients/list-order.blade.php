@@ -19,17 +19,17 @@
                                 aria-labelledby="sidebar-1-1">
                                 <div class="row">
                                     <div class="col">
-                                        <h2>Orders</h2>
+                                        <h2>Đơn hàng gần đây</h2>
                                     </div>
                                 </div>
                                 <div class="row gutter-2">
+                                    @foreach ($orders as $item)
                                     <div class="col-12">
                                         <div class="card card-data bordered">
                                             <div class="card-header">
                                                 <div class="row align-items-center">
                                                     <div class="col">
-                                                        <h2 class="card-title fs-18"><a href="#">Order 12339201</a>
-                                                        </h2>
+                                                        <h2 class="card-title fs-18">Order Code: {{$item->id}}</h2>
                                                     </div>
                                                     <div class="col text-right">
                                                         <span class="dropdown">
@@ -37,178 +37,50 @@
                                                                 data-toggle="dropdown" aria-haspopup="true"
                                                                 aria-expanded="false" type="button"><i
                                                                     class="icon-more-vertical"></i></button>
-                                                            <span class="dropdown-menu" aria-labelledby="dropdown-1">
-                                                                <a class="dropdown-item" href="#!">Action</a>
-                                                                <a class="dropdown-item" href="#!">Another action</a>
-                                                                <a class="dropdown-item" href="#!">Something else
-                                                                    here</a>
-                                                            </span>
                                                         </span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="card-body">
                                                 <ul class="order-preview">
-                                                    <li><a href="product-1.html" title="Fawn Wool / Natural Mammoth Chair"
-                                                            data-toggle="tooltip" data-placement="top"><img
-                                                                src="assets/images/demo/product-1.jpg"
-                                                                alt="Fawn Wool / Natural Mammoth Chair"></a></li>
-                                                    <li><a href="product-1.html" title="Dark Stained NY11 Dining Chair"
-                                                            data-toggle="tooltip" data-placement="top"><img
-                                                                src="assets/images/demo/product-2.jpg"
-                                                                alt="Dark Stained NY11 Dining Chair"></a></li>
-                                                    <li><a href="product-1.html" title="Dark Stained NY11 Dining Chair"
-                                                            data-toggle="tooltip" data-placement="top"><img
-                                                                src="assets/images/demo/product-3.jpg"
-                                                                alt="Dark Stained NY11 Dining Chair"></a></li>
+                                                    @foreach ($item->orderDetail as $detail)
+                                                        <li>
+                                                            <img src="{{'storage/upload/'.$detail->variant->img}}" alt="">
+                                                        </li>
+                                                    @endforeach
                                                 </ul>
                                             </div>
                                             <div class="card-body">
                                                 <ul class="order-meta">
                                                     <li>
                                                         <h5 class="order-meta-title">Order #</h5>
-                                                        <span>12339201</span>
+                                                        <span>{{$item->id}}</span>
                                                     </li>
                                                     <li>
-                                                        <h5 class="order-meta-title">Shipped Date</h5>
-                                                        <span>23 March 2019</span>
+                                                        <h5 class="order-meta-title">Tổng tiền</h5>
+                                                        <span>{{number_format($item->total)}}</span>
                                                     </li>
                                                     <li>
-                                                        <h5 class="order-meta-title">Total</h5>
-                                                        <span>$78.00</span>
-                                                    </li>
-                                                    <li>
-                                                        <h5 class="order-meta-title">Status</h5>
-                                                        <span class="text-muted">Processing</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="card card-data bordered">
-                                            <div class="card-header">
-                                                <div class="row align-items-center">
-                                                    <div class="col">
-                                                        <h2 class="card-title fs-18"><a href="#">Order 12339201</a>
-                                                        </h2>
-                                                    </div>
-                                                    <div class="col text-right">
-                                                        <span class="dropdown">
-                                                            <button class="btn btn-lg btn-white btn-ico" id="dropdown-2"
-                                                                data-toggle="dropdown" aria-haspopup="true"
-                                                                aria-expanded="false" type="button"><i
-                                                                    class="icon-more-vertical"></i></button>
-                                                            <span class="dropdown-menu" aria-labelledby="dropdown-2">
-                                                                <a class="dropdown-item" href="#!">Action</a>
-                                                                <a class="dropdown-item" href="#!">Another action</a>
-                                                                <a class="dropdown-item" href="#!">Something else
-                                                                    here</a>
-                                                            </span>
+                                                        <h5 class="order-meta-title">Trạng thái</h5>
+                                                        <span class="text-muted">
+                                                            @if($item->status == 1)
+                                                                Đang chờ duyệt
+                                                            @elseif($item->status == 2)
+                                                                Đã xác nhận
+                                                            @elseif($item->status == 3)
+                                                                Đang vận chuyển
+                                                            @elseif($item->status == 4)
+                                                                Hoàn thành
+                                                            @else
+                                                                Đã hủy
+                                                            @endif
                                                         </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card-body">
-                                                <ul class="order-preview">
-                                                    <li><a href="product-1.html" title="Fawn Wool / Natural Mammoth Chair"
-                                                            data-toggle="tooltip" data-placement="top"><img
-                                                                src="assets/images/demo/product-1.jpg"
-                                                                alt="Fawn Wool / Natural Mammoth Chair"></a></li>
-                                                    <li><a href="product-1.html" title="Dark Stained NY11 Dining Chair"
-                                                            data-toggle="tooltip" data-placement="top"><img
-                                                                src="assets/images/demo/product-2.jpg"
-                                                                alt="Dark Stained NY11 Dining Chair"></a></li>
-                                                    <li><a href="product-1.html" title="Dark Stained NY11 Dining Chair"
-                                                            data-toggle="tooltip" data-placement="top"><img
-                                                                src="assets/images/demo/product-3.jpg"
-                                                                alt="Dark Stained NY11 Dining Chair"></a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="card-body">
-                                                <ul class="order-meta">
-                                                    <li>
-                                                        <h5 class="order-meta-title">Order #</h5>
-                                                        <span>12339201</span>
-                                                    </li>
-                                                    <li>
-                                                        <h5 class="order-meta-title">Shipped Date</h5>
-                                                        <span>23 March 2019</span>
-                                                    </li>
-                                                    <li>
-                                                        <h5 class="order-meta-title">Total</h5>
-                                                        <span>$78.00</span>
-                                                    </li>
-                                                    <li>
-                                                        <h5 class="order-meta-title">Status</h5>
-                                                        <span class="text-muted">Processing</span>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12">
-                                        <div class="card card-data bordered">
-                                            <div class="card-header">
-                                                <div class="row align-items-center">
-                                                    <div class="col">
-                                                        <h2 class="card-title fs-18"><a href="#">Order 12339201</a>
-                                                        </h2>
-                                                    </div>
-                                                    <div class="col text-right">
-                                                        <span class="dropdown">
-                                                            <button class="btn btn-lg btn-white btn-ico" id="dropdown-3"
-                                                                data-toggle="dropdown" aria-haspopup="true"
-                                                                aria-expanded="false" type="button"><i
-                                                                    class="icon-more-vertical"></i></button>
-                                                            <span class="dropdown-menu" aria-labelledby="dropdown-3">
-                                                                <a class="dropdown-item" href="#!">Action</a>
-                                                                <a class="dropdown-item" href="#!">Another action</a>
-                                                                <a class="dropdown-item" href="#!">Something else
-                                                                    here</a>
-                                                            </span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card-body">
-                                                <ul class="order-preview">
-                                                    <li><a href="product-1.html" title="Fawn Wool / Natural Mammoth Chair"
-                                                            data-toggle="tooltip" data-placement="top"><img
-                                                                src="assets/images/demo/product-1.jpg"
-                                                                alt="Fawn Wool / Natural Mammoth Chair"></a></li>
-                                                    <li><a href="product-1.html" title="Dark Stained NY11 Dining Chair"
-                                                            data-toggle="tooltip" data-placement="top"><img
-                                                                src="assets/images/demo/product-2.jpg"
-                                                                alt="Dark Stained NY11 Dining Chair"></a></li>
-                                                    <li><a href="product-1.html" title="Dark Stained NY11 Dining Chair"
-                                                            data-toggle="tooltip" data-placement="top"><img
-                                                                src="assets/images/demo/product-3.jpg"
-                                                                alt="Dark Stained NY11 Dining Chair"></a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="card-body">
-                                                <ul class="order-meta">
-                                                    <li>
-                                                        <h5 class="order-meta-title">Order #</h5>
-                                                        <span>12339201</span>
-                                                    </li>
-                                                    <li>
-                                                        <h5 class="order-meta-title">Shipped Date</h5>
-                                                        <span>23 March 2019</span>
-                                                    </li>
-                                                    <li>
-                                                        <h5 class="order-meta-title">Total</h5>
-                                                        <span>$78.00</span>
-                                                    </li>
-                                                    <li>
-                                                        <h5 class="order-meta-title">Status</h5>
-                                                        <span class="text-muted">Processing</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>

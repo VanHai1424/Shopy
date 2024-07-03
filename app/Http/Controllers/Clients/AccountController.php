@@ -56,6 +56,13 @@ class AccountController extends Controller
 
     }
 
+    public function historyOrder(Request $req) {
+        $title = 'Lịch sử mua hàng';
+        $user = User::findOrFail(Auth::user()->id);
+        $orders = $user->orders()->with(['orderDetail.variant'])->orderBy('created_at', 'desc')->limit(3)->get();
+        return view('clients.list-order', compact('title', 'orders'));
+    }
+
     public function changePass() {
         $title = 'Đổi mật khẩu';
         return view('clients.password', compact('title'));
