@@ -1,5 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admins\CategoryController;
+use App\Http\Controllers\Admins\ColorController;
+use App\Http\Controllers\Admins\CommentController;
+use App\Http\Controllers\Admins\DashboardController;
+use App\Http\Controllers\Admins\OrderController as AdminsOrderController;
+use App\Http\Controllers\Admins\ProductController;
+use App\Http\Controllers\Admins\SizeController;
+use App\Http\Controllers\Admins\UserController;
 use App\Http\Controllers\Clients\AccountController;
 use App\Http\Controllers\clients\AuthController;
 use App\Http\Controllers\Clients\HomeController;
@@ -53,4 +61,38 @@ Route::middleware(['isLogin'])->group(function () {
     Route::get('doi-mat-khau', [AccountController::class, 'changePass'])->name('doi-mat-khau');
     Route::post('cap-nhat-mat-khau', [AccountController::class, 'handleChangePass'])->name('cap-nhat-mat-khau');
     Route::get('thanh-toan', [OrderController::class, 'checkout'])->name('thanh-toan');
+});
+
+
+// Admin
+Route::middleware('isAdmin')->prefix('admin')->group(function() {
+    Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+
+    Route::prefix('category')->group(function() {
+        Route::get('/', [CategoryController::class, 'list'])->name('category.list');
+    });
+
+    Route::prefix('product')->group(function() {
+        Route::get('/', [ProductController::class, 'list'])->name('product.list');
+    });
+
+    Route::prefix('color')->group(function() {
+        Route::get('/', [ColorController::class, 'list'])->name('color.list');
+    });
+
+    Route::prefix('size')->group(function() {
+        Route::get('/', [SizeController::class, 'list'])->name('size.list');
+    });
+
+    Route::prefix('comment')->group(function() {
+        Route::get('/', [CommentController::class, 'list'])->name('comment.list');
+    });
+
+    Route::prefix('order')->group(function() {
+        Route::get('/', [AdminsOrderController::class, 'list'])->name('order.list');
+    });
+
+    Route::prefix('user')->group(function() {
+        Route::get('/', [UserController::class, 'list'])->name('user.list');
+    });
 });
