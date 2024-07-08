@@ -68,9 +68,7 @@ Route::middleware(['isLogin'])->group(function () {
 Route::middleware('isAdmin')->prefix('admin')->group(function() {
     Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
-    Route::prefix('category')->group(function() {
-        Route::get('/', [CategoryController::class, 'list'])->name('category.list');
-    });
+    Route::resource('category', CategoryController::class);
 
     Route::prefix('product')->group(function() {
         Route::get('/', [ProductController::class, 'list'])->name('product.list');
