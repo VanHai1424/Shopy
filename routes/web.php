@@ -74,9 +74,7 @@ Route::middleware('isAdmin')->prefix('admin')->group(function() {
         Route::get('/', [ProductController::class, 'list'])->name('product.list');
     });
 
-    Route::prefix('color')->group(function() {
-        Route::get('/', [ColorController::class, 'list'])->name('color.list');
-    });
+    Route::resource('color', ColorController::class);
 
     Route::prefix('size')->group(function() {
         Route::get('/', [SizeController::class, 'list'])->name('size.list');
