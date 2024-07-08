@@ -76,10 +76,7 @@ Route::middleware('isAdmin')->prefix('admin')->group(function() {
 
     Route::resource('color', ColorController::class);
     Route::resource('size', SizeController::class);
-
-    Route::prefix('comment')->group(function() {
-        Route::get('/', [CommentController::class, 'list'])->name('comment.list');
-    });
+    Route::resource('comment', CommentController::class);
 
     Route::prefix('order')->group(function() {
         Route::get('/', [AdminsOrderController::class, 'list'])->name('order.list');

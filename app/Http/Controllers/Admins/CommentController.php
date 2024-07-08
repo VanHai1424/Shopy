@@ -8,9 +8,27 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function list() {
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
         $title = 'List Comment';
         $comments = Comment::get();
         return view('admins.comment.list', compact('title', 'comments'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        $comment = Comment::find($id);
+
+        $comment->delete();
+        return redirect()->route('comment.index')->with([
+            'msg' => 'Xóa thành công',
+            'alert-type' => 'success'
+        ]);
     }
 }
