@@ -77,10 +77,8 @@ Route::middleware('isAdmin')->prefix('admin')->group(function() {
     Route::resource('color', ColorController::class);
     Route::resource('size', SizeController::class);
     Route::resource('comment', CommentController::class);
-
-    Route::prefix('order')->group(function() {
-        Route::get('/', [AdminsOrderController::class, 'list'])->name('order.list');
-    });
+    Route::resource('order', AdminsOrderController::class);
+    Route::post('order/update-status/{id}', [AdminsOrderController::class, 'updateStatus'])->name('order.update-status');
 
     Route::prefix('user')->group(function() {
         Route::get('/', [UserController::class, 'list'])->name('user.list');

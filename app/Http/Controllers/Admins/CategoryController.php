@@ -27,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $title = 'Thêm mới';
+        $title = 'Add Category';
         $categoryParent = Category::where('parent_id', 0)->get();
         return view('admins.category.add', compact('title', 'categoryParent'));
     }
@@ -75,7 +75,7 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        $title = 'Chỉnh sửa';
+        $title = 'Update Category';
         $category = Category::find($id);
         $categoryParent = Category::where('parent_id', 0)->get();
         return view('admins.category.update', compact('title', 'category', 'categoryParent'));

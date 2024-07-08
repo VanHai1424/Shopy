@@ -153,7 +153,7 @@
                     <div class="collapse menu-dropdown" id="sidebarApps6">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{route('order.list')}}" class="nav-link"> List </a>
+                                <a href="{{route('order.index')}}" class="nav-link"> List </a>
                             </li>
                         </ul>
                     </div>

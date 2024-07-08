@@ -11,7 +11,6 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <h5 class="card-title mb-0">Danh Sách</h5>
-                    <a href="#!" class="btn btn-primary">Thêm mới</a>
                 </div>
                 <div class="card-body">
                     <table id="example" class="table table-bordered dt-responsive nowrap table-striped align-middle text-center"
@@ -60,15 +59,9 @@
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end">
                                             <li>
-                                                <a class="dropdown-item edit-item-btn"><i
-                                                        class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                    Edit
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item remove-item-btn">
-                                                    <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                    Delete
+                                                <a href="{{route('order.show', $item->id)}}" class="dropdown-item edit-item-btn cursor-pointer"><i
+                                                        class="ri-information-fill align-bottom me-2 text-muted"></i>
+                                                    Detail
                                                 </a>
                                             </li>
                                         </ul>

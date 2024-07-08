@@ -24,7 +24,7 @@ class SizeController extends Controller
      */
     public function create()
     {
-        $title = 'Thêm mới';
+        $title = 'Add Color';
         return view('admins.size.add', compact('title'));
     }
 
@@ -56,7 +56,7 @@ class SizeController extends Controller
      */
     public function edit(string $id)
     {
-        $title = 'Chỉnh sửa';
+        $title = 'Update Color';
         $size = Size::find($id);
         return view('admins.size.update', compact('title', 'size'));
     }

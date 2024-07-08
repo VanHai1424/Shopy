@@ -24,7 +24,7 @@ class ColorController extends Controller
      */
     public function create()
     {
-        $title = 'Thêm mới';
+        $title = 'Add Color';
         return view('admins.color.add', compact('title'));
     }
 
@@ -56,7 +56,7 @@ class ColorController extends Controller
      */
     public function edit(string $id)
     {
-        $title = 'Chỉnh sửa';
+        $title = 'Update Color';
         $color = Color::find($id);
         return view('admins.color.update', compact('title', 'color'));
     }
