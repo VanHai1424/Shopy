@@ -79,8 +79,5 @@ Route::middleware('isAdmin')->prefix('admin')->group(function() {
     Route::resource('comment', CommentController::class);
     Route::resource('order', AdminsOrderController::class);
     Route::post('order/update-status/{id}', [AdminsOrderController::class, 'updateStatus'])->name('order.update-status');
-
-    Route::prefix('user')->group(function() {
-        Route::get('/', [UserController::class, 'list'])->name('user.list');
-    });
+    Route::resource('user', UserController::class);
 });

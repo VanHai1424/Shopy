@@ -166,10 +166,10 @@
                     <div class="collapse menu-dropdown" id="sidebarApps7">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{route('user.list')}}" class="nav-link"> List </a>
+                                <a href="{{route('user.index')}}" class="nav-link"> List </a>
                             </li>
                             <li class="nav-item">
-                                <a href="apps-chat.html" class="nav-link"> Add </a>
+                                <a href="{{route('user.create')}}" class="nav-link"> Add </a>
                             </li>
                         </ul>
                     </div>

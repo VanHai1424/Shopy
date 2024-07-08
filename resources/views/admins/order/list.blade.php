@@ -53,18 +53,10 @@
                                 <td>{{$item->user->name}}</td>
                                 <td>
                                     <div class="dropdown d-inline-block">
-                                        <button class="btn btn-soft-secondary btn-sm dropdown" type="button"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="ri-more-fill align-middle"></i>
-                                        </button>
-                                        <ul class="dropdown-menu dropdown-menu-end">
-                                            <li>
-                                                <a href="{{route('order.show', $item->id)}}" class="dropdown-item edit-item-btn cursor-pointer"><i
-                                                        class="ri-information-fill align-bottom me-2 text-muted"></i>
-                                                    Detail
-                                                </a>
-                                            </li>
-                                        </ul>
+                                        <a href="{{route('order.show', $item->id)}}" class="dropdown-item edit-item-btn cursor-pointer"><i
+                                            class="ri-information-fill align-bottom me-2 text-muted" style="font-size: 25px;"></i>
+                                            
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
