@@ -11,7 +11,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <h5 class="card-title mb-0">Danh Sách</h5>
-                    <a href="#!" class="btn btn-primary">Thêm mới</a>
+                    <a href="{{route('size.create')}}" class="btn btn-primary">Thêm mới</a>
                 </div>
                 <div class="card-body">
                     <table id="example" class="table table-bordered dt-responsive nowrap table-striped align-middle text-center"
@@ -24,6 +24,11 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @if (session('msg'))
+                            <div class="alert alert-{{session('alert-type')}}">
+                                <span>{{session('msg')}}</span>
+                            </div>
+                            @endif
                             @foreach ($sizes as $item)
                             <tr>
                                 <td>{{$item->id}}</td>
@@ -36,16 +41,21 @@
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end">
                                             <li>
-                                                <a class="dropdown-item edit-item-btn"><i
+                                                <a href="{{route('size.edit', $item->id)}}" class="dropdown-item edit-item-btn"><i
                                                         class="ri-pencil-fill align-bottom me-2 text-muted"></i>
                                                     Edit
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item remove-item-btn">
+                                                <a data-id="{{ $item->id }}" class="dropdown-item remove-item-btn cursor-pointer">
                                                     <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
                                                     Delete
                                                 </a>
+
+                                                <form id="delete-form-{{ $item->id }}" action="{{ route('size.destroy', $item->id) }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
                                             </li>
                                         </ul>
                                     </div>
@@ -91,4 +101,21 @@
     
     </script>
     
+@endsection
+
+@section('script')
+<script>
+    $(document).ready(function() {
+        $('.remove-item-btn').on('click', function(event) {
+            event.preventDefault();
+
+            var id = $(this).data('id');
+            var form = $('#delete-form-' + id);
+
+            if (confirm('Bạn có chắc chắn muốn xóa?')) {
+                form.submit(); 
+            }
+        });
+    });
+</script>
 @endsection

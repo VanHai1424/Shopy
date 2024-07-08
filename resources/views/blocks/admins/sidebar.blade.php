@@ -124,10 +124,10 @@
                     <div class="collapse menu-dropdown" id="sidebarApps4">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{route('size.list')}}" class="nav-link"> List </a>
+                                <a href="{{route('size.index')}}" class="nav-link"> List </a>
                             </li>
                             <li class="nav-item">
-                                <a href="apps-chat.html" class="nav-link"> Add </a>
+                                <a href="{{route('size.create')}}" class="nav-link"> Add </a>
                             </li>
                         </ul>
                     </div>
