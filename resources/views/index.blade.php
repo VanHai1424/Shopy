@@ -42,7 +42,7 @@
                                     <div class="col-6 col-md-4 col-lg-2">
                                         <a href="{{route('danh-muc', $item->id)}}">
                                             <figure class="category">
-                                                <img src="{{asset('storage/upload/'. $item->img)}}" alt="Image">
+                                                <img src="{{asset('storage/upload/categories/'. $item->img)}}" alt="Image">
                                                 <figcaption>{{$item->name}}</figcaption>
                                             </figure>
                                         </a>

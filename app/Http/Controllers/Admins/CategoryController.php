@@ -129,10 +129,15 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         $category = Category::find($id);
-        $category->delete();
-        return redirect()->route('category.index')->with([
-            'msg' => 'Xóa thành công',
-            'alert-type' => 'success'
-        ]);
+        $img = $category->img;
+        $deleted = $category->delete();
+        if($deleted) {
+            ImageHelper::removeImage($img, 'categories');
+            return redirect()->route('category.index')->with([
+                'msg' => 'Xóa thành công',
+                'alert-type' => 'success'
+            ]);
+        }
+        
     } 
 }

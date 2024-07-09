@@ -65,7 +65,7 @@ Route::middleware(['isLogin'])->group(function () {
 
 
 // Admin
-Route::middleware('isAdmin')->prefix('admin')->group(function() {
+Route::middleware(['isLogin', 'isAdmin'])->prefix('admin')->group(function() {
     Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
     Route::resource('category', CategoryController::class);

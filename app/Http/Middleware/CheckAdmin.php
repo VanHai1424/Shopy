@@ -16,14 +16,10 @@ class CheckAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::check()) {
-            if(Auth::user()->role === 0) {
-                return $next($request);
-            } else {
-                return redirect()->route('home');
-            }
+        if(Auth::user()->role === 0) {
+            return $next($request);
         } else {
-            return redirect()->route('dang-nhap');
+            return redirect()->route('home');
         }
     }
 }
