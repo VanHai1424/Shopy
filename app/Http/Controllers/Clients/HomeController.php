@@ -17,7 +17,7 @@ class HomeController extends Controller
         foreach ($data as $key => $value) {
             $childCategories[$value['parent_id']][] = $value;
         }
-        $products = Product::orderBy('created_at', 'desc')->limit(3)->get();
+        $products = Product::where('status', 1)->orderBy('created_at', 'desc')->limit(3)->get();
         return view('index', compact('title', 'parentCategories', 'childCategories', 'products'));
     }
 }

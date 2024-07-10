@@ -32,7 +32,7 @@
                         <ul class="order-preview">
                             @foreach ($orderSuccess['images'] as $item)
                             <li>
-                                <img src="{{asset('storage/upload/'.$item)}}" alt="">
+                                <img src="{{asset('storage/upload/products/'.$item)}}" alt="">
                             </li>
                             @endforeach
                         </ul>

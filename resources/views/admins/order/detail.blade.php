@@ -41,7 +41,7 @@
                                     <td>
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 avatar-md bg-light rounded p-1">
-                                                <img src="{{asset('storage/upload/'.$item->variant->img)}}" alt=""
+                                                <img src="{{asset('storage/upload/products/'.$item->variant->img)}}" alt=""
                                                     class="img-fluid d-block">
                                             </div>
                                             <div class="flex-grow-1 ms-3">

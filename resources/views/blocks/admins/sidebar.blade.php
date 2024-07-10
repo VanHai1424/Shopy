@@ -92,10 +92,10 @@
                     <div class="collapse menu-dropdown" id="sidebarApps2">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{route('product.list')}}" class="nav-link"> List </a>
+                                <a href="{{route('product.index')}}" class="nav-link"> List </a>
                             </li>
                             <li class="nav-item">
-                                <a href="apps-chat.html" class="nav-link"> Add </a>
+                                <a href="{{route('product.create')}}" class="nav-link"> Add </a>
                             </li>
                         </ul>
                     </div>

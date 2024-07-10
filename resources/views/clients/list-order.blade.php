@@ -45,7 +45,7 @@
                                                 <ul class="order-preview">
                                                     @foreach ($item->orderDetail as $detail)
                                                         <li>
-                                                            <img src="{{'storage/upload/'.$detail->variant->img}}" alt="">
+                                                            <img src="{{'storage/upload/products/'.$detail->variant->img}}" alt="">
                                                         </li>
                                                     @endforeach
                                                 </ul>

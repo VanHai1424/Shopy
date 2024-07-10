@@ -88,10 +88,9 @@ class CategoryController extends Controller
     {
         $validator = Validator::make($req->all(), [
             'name' => 'required',
-            'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'img' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ], [
             'name.required' => 'Tên là bắt buộc',
-            'img.required' => 'Vui lòng chọn một hình ảnh.',
             'img.image' => 'Tệp phải là hình ảnh.',
             'img.mimes' => 'Hình ảnh phải có định dạng: jpeg, png, jpg, gif.',
             'img.max' => 'Kích thước hình ảnh không được vượt quá 2MB.',
@@ -104,15 +103,22 @@ class CategoryController extends Controller
         try {
             DB::beginTransaction();
             $category = Category::find($id);
-            if(!ImageHelper::removeImage($category->img, 'categories')) {
-                throw new Exception();
-            }
-            $filename = ImageHelper::uploadImage($req->img, 'categories');
-            $category->update([
+    
+            $updateData = [
                 'name' => $req->name,
                 'parent_id' => $req->parent_id,
-                'img' => $filename
-            ]);
+            ];
+    
+            if ($req->hasFile('img')) {
+                if(!ImageHelper::removeImage($category->img, 'categories')) {
+                    throw new Exception();
+                }
+                $filename = ImageHelper::uploadImage($req->img, 'categories');
+                $updateData['img'] = $filename;
+            }
+    
+            $category->update($updateData);
+    
             DB::commit();
             return redirect()->route('category.index')->with([
                 'msg' => 'Cập nhật thành công',

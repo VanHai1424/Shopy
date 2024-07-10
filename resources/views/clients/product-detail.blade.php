@@ -37,7 +37,7 @@
                                 data-thumbs="true" data-nav="true">
                                 @foreach ($imgs as $item)
                                 <figure>
-                                    <a href="{{asset('storage/upload/'.$item)}}"><img src="{{asset('storage/upload/'.$item)}}"
+                                    <a href="{{asset('storage/upload/products/'.$item)}}"><img src="{{asset('storage/upload/products/'.$item)}}"
                                             alt="Image"></a>
                                 </figure>
                                 @endforeach
@@ -47,7 +47,7 @@
                             <div class="owl-thumbs" data-slider-id="1">
                                 @foreach ($imgs as $item)
                                 <span class="owl-thumb-item">
-                                    <img src="{{asset('storage/upload/'.$item)}}"alt="">
+                                    <img src="{{asset('storage/upload/products/'.$item)}}"alt="">
                                 </span>
                                 @endforeach
                             </div>
@@ -114,7 +114,7 @@
                                     <div id="collapse-1-1" class="collapse show" aria-labelledby="heading-1-1"
                                         data-parent="#accordion-1">
                                         <div class="card-body">
-                                            <p>{{$product->desc}}</p>
+                                            {!!$product->desc!!}
                                         </div>
                                     </div>
                                 </div>
@@ -194,7 +194,7 @@
                         <div class="card card-product">
                             <figure class="card-image">
                                 <a href="{{route('chi-tiet', $item->id)}}">
-                                    <img src="{{asset('storage/upload/'.$item->thumbnail)}}" alt="Image">
+                                    <img src="{{asset('storage/upload/products/'.$item->thumbnail)}}" alt="Image">
                                 </a>
                             </figure>
                             <a href="{{route('chi-tiet', $item->id)}}" class="card-body">

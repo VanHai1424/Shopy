@@ -5,7 +5,7 @@
         <div class="card card-product">
             <figure class="card-image">
                 <a href="{{route('chi-tiet', $item->id)}}">
-                    <img src="{{ asset('storage/upload/' . $item->thumbnail) }}" alt="Image">
+                    <img src="{{ asset('storage/upload/products/' . $item->thumbnail) }}" alt="Image">
                 </a>
             </figure>
             <div class="card-footer">

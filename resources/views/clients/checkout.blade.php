@@ -93,7 +93,7 @@
                         <h2 class="mb-3 text-uppercase fs-20">Đơn hàng</h2>
                         @foreach ($cart as $item)
                         <div class="cart-item">
-                            <a href="#!" class="cart-item-image"><img src="{{asset('storage/upload/'.$item['img'])}}"
+                            <a href="#!" class="cart-item-image"><img src="{{asset('storage/upload/products/'.$item['img'])}}"
                                     alt="Image"></a>
                             <div class="cart-item-body">
                                 <div class="row">

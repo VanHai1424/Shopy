@@ -96,9 +96,9 @@
                 @foreach ($products as $item)
                 <div class="col-md-4">
                     <div class="card card-product">
-                        <figure class="card-image">
+                        <figure class="card-image d-flex justify-content-center align-items-center" style="height: 379.99px;">
                             <a href="{{route('chi-tiet', $item->id)}}">
-                                <img src="{{asset('storage/upload/'. $item->thumbnail)}}" alt="Image">
+                                <img src="{{asset('storage/upload/products/'. $item->thumbnail)}}" alt="Image">
                             </a>
                         </figure>
                         <div class="card-footer">

@@ -3,7 +3,7 @@
     <div class="bg-white cart-item-list p-2 p-lg-3 mb-1">
         @foreach ($cart as $item)
         <div class="cart-item">
-            <a href="#!" class="cart-item-image"><img src="{{asset('storage/upload/'.$item['img'])}}"
+            <a href="#!" class="cart-item-image"><img src="{{asset('storage/upload/products/'.$item['img'])}}"
                     alt="Image"></a>
             <div class="cart-item-body">
                 <div class="row">

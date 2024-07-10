@@ -30,13 +30,13 @@ class OrderController extends Controller
             foreach ($category->childrens as $childCategory) {
                 $products = $products->merge($childCategory->products);
             }
-            $products = $products->sortByDesc('created_at');
+            $products = $products->where('status', 1)->sortByDesc('created_at');
             $currentPage = Paginator::resolveCurrentPage();
             $currentPageItems = $products->slice(($currentPage - 1) * $perPage, $perPage)->all();
             $products = new LengthAwarePaginator($currentPageItems, $products->count(), $perPage);
             $products->setPath($req->url());
         } else {
-            $products = $category->products()->orderBy('created_at', 'desc')->paginate($perPage);
+            $products = $category->products()->where('status', 1)->orderBy('created_at', 'desc')->paginate($perPage);
         }
 
         $sizes = Size::get();
@@ -73,7 +73,7 @@ class OrderController extends Controller
                 $query->whereIn('color_id', $colors);
             }
         });
-        $products = $query->orderBy('created_at', 'desc')->paginate(6);
+        $products = $query->where('status', 1)->orderBy('created_at', 'desc')->paginate(6);
         $html = view('blocks.clients.filtered-products', compact('products'))->render();
     
         return response()->json([
