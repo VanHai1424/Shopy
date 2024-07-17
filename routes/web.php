@@ -66,7 +66,7 @@ Route::middleware(['isLogin'])->group(function () {
 
 // Admin
 Route::middleware(['isLogin', 'isAdmin'])->prefix('admin')->group(function() {
-    Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::resource('category', CategoryController::class);
     Route::resource('product', ProductController::class);
     Route::resource('color', ColorController::class);
