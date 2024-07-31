@@ -56,6 +56,7 @@
                                                     Edit
                                                 </a>
                                             </li>
+                                            @if (!(Auth::user()->id == $item->id))
                                             <li>
                                                 <a data-id="{{ $item->id }}" class="dropdown-item remove-item-btn cursor-pointer">
                                                     <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
@@ -67,6 +68,7 @@
                                                     @method('DELETE')
                                                 </form>
                                             </li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </td>

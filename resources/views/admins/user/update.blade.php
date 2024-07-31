@@ -70,15 +70,17 @@
                                     </div>
                                 </div>
                                 <!--end col-->
-                                <div class="col-md-4">
-                                    <div>
-                                        <label class="form-label" for="role">Role</label>
-                                        <select class="form-select" id="role" name="role">
-                                            <option {{$user->role == 1 ? "selected" : ""}} value="1">User</option>
-                                            <option {{$user->role == 0 ? "selected" : ""}} value="0">Admin</option>
-                                        </select>
+                                @if ($user->role == 1)
+                                    <div class="col-md-4">
+                                        <div>
+                                            <label class="form-label" for="role">Role</label>
+                                            <select class="form-select" id="role" name="role">
+                                                <option {{$user->role == 1 ? "selected" : ""}} value="1">User</option>
+                                                <option {{$user->role == 0 ? "selected" : ""}} value="0">Admin</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
                                 <!--end col-->
                                 <div>
                                     <button type="submit" class="btn btn-primary">Cập nhật</button>

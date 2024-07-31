@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         $title = 'List User';
-        $users = User::where('role', 1)->get();
+        $users = User::get();
         return view('admins.user.list', compact('title', 'users'));
     }
 
