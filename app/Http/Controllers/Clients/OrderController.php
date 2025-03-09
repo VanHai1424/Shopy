@@ -17,6 +17,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
@@ -227,13 +228,12 @@ class OrderController extends Controller
         if($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
-
         $cart = session()->get('cart', []);
         $totalPrice = 0;
         foreach ($cart as $key => $value) {
             $totalPrice += $value['product']['price'] * $value['quantityOrder'];
         }
-
+        
         try {
             DB::beginTransaction();
             $order = Order::create([
@@ -245,6 +245,7 @@ class OrderController extends Controller
                 'status' => 1,
                 'user_id' => Auth::user()->id
             ]);
+
             foreach ($cart as $key => $value) {
                 OrderDetail::create([
                     'order_id' => $order->id,
@@ -266,6 +267,7 @@ class OrderController extends Controller
             return redirect()->route('thanh-cong');
         } catch (Exception $e) {
             DB::rollback();
+            dd($e);
             return redirect()->back()->with([
                 'msg' => 'Có lỗi xảy ra',
                 'alert-type' => 'danger'
